@@ -21,8 +21,8 @@ public class UserTests2 extends ExtentReportManager {
     @BeforeClass
     public void setup() {
 
-        extentTest = extentReports.createTest("Pest Store Users API setup");
-        extentTest.info("Users API setup");
+        //extentTest = extentReports.createTest("Pest Store Users API setup");
+        //extentTest.info("Users API setup");
 
         faker = new Faker();
         userPayload = new User();

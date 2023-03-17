@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ExtentReportManager implements ITestListener {
+
     public ExtentReports extentReports;
     public ExtentHtmlReporter extentHtmlReporter;
     public ExtentSparkReporter extentSparkReporter;
@@ -42,10 +43,12 @@ public class ExtentReportManager implements ITestListener {
         extentReports.setSystemInfo("Environment", "QA Environment");
         extentReports.setSystemInfo("User", "Suleyman Cevik");
     }
+
+
     /*@BeforeTest(alwaysRun = true)
     public void onStart(ITestContext testContext) {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());//time stamp
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date());//time stamp
         String filePath = System.getProperty("user.dir") + "/reports/TestReport-" + timeStamp + ".html";
         repName = "TestReport-" + timeStamp + ".html";
         extentSparkReporter = new ExtentSparkReporter(".\\reports\\" + repName);// specify location of the report
