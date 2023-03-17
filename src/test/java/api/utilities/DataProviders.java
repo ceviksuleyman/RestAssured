@@ -50,5 +50,8 @@ public class DataProviders {
     public static void main(String[] args) throws IOException {
         Object[] arr = getUserNames();
         System.out.println(Arrays.deepToString(arr));
+        DataProviders dataProviders = new DataProviders();
+        Object[] arr1 = dataProviders.getAllData();
+        System.out.println(Arrays.deepToString(arr1));
     }
 }

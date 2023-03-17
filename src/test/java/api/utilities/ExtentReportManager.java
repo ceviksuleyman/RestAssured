@@ -25,7 +25,7 @@ public class ExtentReportManager implements ITestListener {
     @BeforeTest(alwaysRun = true)
     public void onStart(ITestContext testContext) {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date());
         String filePath = System.getProperty("user.dir") + "/reports/TestReport-" + timeStamp + ".html";
 
         extentHtmlReporter = new ExtentHtmlReporter(filePath);
@@ -39,7 +39,7 @@ public class ExtentReportManager implements ITestListener {
         extentReports.setSystemInfo("Application", "Pest Store Users API");
         extentReports.setSystemInfo("Operating System", System.getProperty("os.name"));
         extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
-        extentReports.setSystemInfo("Environment", "QA");
+        extentReports.setSystemInfo("Environment", "QA Environment");
         extentReports.setSystemInfo("User", "Suleyman Cevik");
     }
     /*@BeforeTest(alwaysRun = true)
@@ -47,7 +47,7 @@ public class ExtentReportManager implements ITestListener {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());//time stamp
         String filePath = System.getProperty("user.dir") + "/reports/TestReport-" + timeStamp + ".html";
-        repName = "Test-Report-" + timeStamp + ".html";
+        repName = "TestReport-" + timeStamp + ".html";
         extentSparkReporter = new ExtentSparkReporter(".\\reports\\" + repName);// specify location of the report
         //extentSparkReporter = new ExtentSparkReporter(filePath);// specify location of the report
         extentSparkReporter.config().setDocumentTitle("RestAssuredAutomationProject"); // Title of report
@@ -59,7 +59,7 @@ public class ExtentReportManager implements ITestListener {
         extentReports.setSystemInfo("Operating System", System.getProperty("os.name"));
         extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
         extentReports.setSystemInfo("Environment", "QA");
-        extentReports.setSystemInfo("User", "Cevik");
+        extentReports.setSystemInfo("User", "Suleyman Cevik");
     }*/
 
 
