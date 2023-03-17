@@ -32,6 +32,7 @@ public class DDTests {
     public void testDeleteUserByName(String userName) {
 
         Response response = UserEndPoints.deleteUser(userName);
+        response.then().log().all();
 
         Assert.assertEquals(response.getStatusCode(), 200);
     }

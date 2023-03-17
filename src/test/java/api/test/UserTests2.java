@@ -2,6 +2,7 @@ package api.test;
 
 import api.endpoints.UserEndPoints2;
 import api.payload.User;
+import api.utilities.ExtentReportManager;
 import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class UserTests2 {
+public class UserTests2 extends ExtentReportManager {
 
     Faker faker;
     User userPayload;
@@ -19,6 +20,9 @@ public class UserTests2 {
 
     @BeforeClass
     public void setup() {
+
+        extentTest = extentReports.createTest("Pest Store Users API setup");
+        extentTest.info("Users API setup");
 
         faker = new Faker();
         userPayload = new User();
@@ -31,11 +35,11 @@ public class UserTests2 {
         userPayload.setPassword(faker.internet().password(5, 10));
         userPayload.setPhone(faker.phoneNumber().cellPhone());
 
+
         //logs
         logger = LogManager.getLogger(this.getClass());
 
         logger.debug("debugging.....");
-
     }
 
     @Test(priority = 1)
@@ -43,11 +47,11 @@ public class UserTests2 {
 
         logger.info("********** Creating user  ***************");
         Response response = UserEndPoints2.createUser(userPayload);
-        response.then().log().all();
+        response.then().log().body();
 
         Assert.assertEquals(response.getStatusCode(), 200);
 
-        logger.info("**********User is creatged  ***************");
+        logger.info("**********User is created  ***************");
     }
 
     @Test(priority = 2)
@@ -56,7 +60,7 @@ public class UserTests2 {
         logger.info("********** Reading User Info ***************");
 
         Response response = UserEndPoints2.readUser(this.userPayload.getUsername());
-        response.then().log().all();
+        response.then().log().body();
         Assert.assertEquals(response.getStatusCode(), 200);
 
         logger.info("**********User info  is displayed ***************");
@@ -90,6 +94,7 @@ public class UserTests2 {
         logger.info("**********   Deleting User  ***************");
 
         Response response = UserEndPoints2.deleteUser(this.userPayload.getUsername());
+        response.then().log().all();
         Assert.assertEquals(response.getStatusCode(), 200);
 
         logger.info("********** User deleted ***************");

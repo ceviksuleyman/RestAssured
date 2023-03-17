@@ -3,6 +3,7 @@ package api.utilities;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.ITestContext;
@@ -15,62 +16,81 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ExtentReportManager implements ITestListener {
-
-    public ExtentSparkReporter sparkReporter;
-    public ExtentReports extent;
-    public ExtentTest test;
-
+    public ExtentReports extentReports;
+    public ExtentHtmlReporter extentHtmlReporter;
+    public ExtentSparkReporter extentSparkReporter;
+    public ExtentTest extentTest;
     String repName;
 
     @BeforeTest(alwaysRun = true)
     public void onStart(ITestContext testContext) {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());//time stamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+        String filePath = System.getProperty("user.dir") + "/reports/TestReport-" + timeStamp + ".html";
+
+        extentHtmlReporter = new ExtentHtmlReporter(filePath);
+
+        extentHtmlReporter.config().setDocumentTitle("RestAssuredAutomationProject");
+        extentHtmlReporter.config().setReportName("Pet Store Users API");
+        extentHtmlReporter.config().setTheme(Theme.DARK);
+
+        extentReports = new ExtentReports();
+        extentReports.attachReporter(extentHtmlReporter);
+        extentReports.setSystemInfo("Application", "Pest Store Users API");
+        extentReports.setSystemInfo("Operating System", System.getProperty("os.name"));
+        extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
+        extentReports.setSystemInfo("Environment", "QA");
+        extentReports.setSystemInfo("User", "Cevik");
+    }
+    /*@BeforeTest(alwaysRun = true)
+    public void onStart(ITestContext testContext) {
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());//time stamp
         String filePath = System.getProperty("user.dir") + "/reports/TestReport-" + timeStamp + ".html";
         repName = "Test-Report-" + timeStamp + ".html";
 
         //sparkReporter = new ExtentSparkReporter(".\\reports\\" + repName);// specify location of the report
-        sparkReporter = new ExtentSparkReporter(filePath);// specify location of the report
+        extentSparkReporter = new ExtentSparkReporter(filePath);// specify location of the report
 
-        sparkReporter.config().setDocumentTitle("RestAssuredAutomationProject"); // Title of report
-        sparkReporter.config().setReportName("Pet Store Users API"); // name of the report
-        sparkReporter.config().setTheme(Theme.DARK);
+        extentSparkReporter.config().setDocumentTitle("RestAssuredAutomationProject"); // Title of report
+        extentSparkReporter.config().setReportName("Pet Store Users API"); // name of the report
+        extentSparkReporter.config().setTheme(Theme.DARK);
 
-        extent = new ExtentReports();
-        extent.attachReporter(sparkReporter);
-        extent.setSystemInfo("Application", "Pest Store Users API");
-        extent.setSystemInfo("Operating System", System.getProperty("os.name"));
-        extent.setSystemInfo("User Name", System.getProperty("user.name"));
-        extent.setSystemInfo("Environment", "QA");
-        extent.setSystemInfo("User", "Cevik");
-    }
+        extentReports = new ExtentReports();
+        extentReports.attachReporter(extentSparkReporter);
+        extentReports.setSystemInfo("Application", "Pest Store Users API");
+        extentReports.setSystemInfo("Operating System", System.getProperty("os.name"));
+        extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
+        extentReports.setSystemInfo("Environment", "QA");
+        extentReports.setSystemInfo("User", "Cevik");
+    }*/
 
 
     public void onTestSuccess(ITestResult result) {
-        test = extent.createTest(result.getName());
-        test.assignCategory(result.getMethod().getGroups());
-        test.createNode(result.getName());
-        test.log(Status.PASS, "Test Passed");
+        extentTest = extentReports.createTest(result.getName());
+        extentTest.assignCategory(result.getMethod().getGroups());
+        extentTest.createNode(result.getName());
+        extentTest.log(Status.PASS, "Test Passed");
     }
 
     public void onTestFailure(ITestResult result) {
-        test = extent.createTest(result.getName());
-        test.createNode(result.getName());
-        test.assignCategory(result.getMethod().getGroups());
-        test.log(Status.FAIL, "Test Failed");
-        test.log(Status.FAIL, result.getThrowable().getMessage());
+        extentTest = extentReports.createTest(result.getName());
+        extentTest.createNode(result.getName());
+        extentTest.assignCategory(result.getMethod().getGroups());
+        extentTest.log(Status.FAIL, "Test Failed");
+        extentTest.log(Status.FAIL, result.getThrowable().getMessage());
     }
 
     public void onTestSkipped(ITestResult result) {
-        test = extent.createTest(result.getName());
-        test.createNode(result.getName());
-        test.assignCategory(result.getMethod().getGroups());
-        test.log(Status.SKIP, "Test Skipped");
-        test.log(Status.SKIP, result.getThrowable().getMessage());
+        extentTest = extentReports.createTest(result.getName());
+        extentTest.createNode(result.getName());
+        extentTest.assignCategory(result.getMethod().getGroups());
+        extentTest.log(Status.SKIP, "Test Skipped");
+        extentTest.log(Status.SKIP, result.getThrowable().getMessage());
     }
 
     @AfterTest(alwaysRun = true)
     public void onFinish(ITestContext testContext) {
-        extent.flush();
+        extentReports.flush();
     }
 }
