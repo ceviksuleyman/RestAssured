@@ -51,13 +51,15 @@ public class ExtentReportManager implements ITestListener {
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date());//time stamp
         String filePath = System.getProperty("user.dir") + "/reports/TestReport-" + timeStamp + ".html";
         repName = "TestReport-" + timeStamp + ".html";
+
         extentSparkReporter = new ExtentSparkReporter(".\\reports\\" + repName);// specify location of the report
-        //extentSparkReporter = new ExtentSparkReporter(filePath);// specify location of the report
         extentSparkReporter.config().setDocumentTitle("RestAssuredAutomationProject"); // Title of report
         extentSparkReporter.config().setReportName("Pet Store Users API"); // name of the report
         extentSparkReporter.config().setTheme(Theme.DARK);
+
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
+
         extentReports.setSystemInfo("Application", "Pest Store Users API");
         extentReports.setSystemInfo("Operating System", System.getProperty("os.name"));
         extentReports.setSystemInfo("User Name", System.getProperty("user.name"));

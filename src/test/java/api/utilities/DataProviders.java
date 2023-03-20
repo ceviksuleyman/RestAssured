@@ -1,7 +1,6 @@
 package api.utilities;
 
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -52,6 +51,6 @@ public class DataProviders {
         System.out.println(Arrays.deepToString(arr));
         DataProviders dataProviders = new DataProviders();
         Object[] arr1 = dataProviders.getAllData();
-        System.out.println(Arrays.deepToString(arr1));
+        System.out.println(Arrays.deepToString(new DataProviders().getAllData()));
     }
 }
