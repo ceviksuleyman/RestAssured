@@ -3,7 +3,7 @@ package api.utilities;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+//import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.ITestContext;
@@ -18,12 +18,12 @@ import java.util.Date;
 public class ExtentReportManager implements ITestListener {
 
     public ExtentReports extentReports;
-    public ExtentHtmlReporter extentHtmlReporter;
+    //public ExtentHtmlReporter extentHtmlReporter;
     public ExtentSparkReporter extentSparkReporter;
     public ExtentTest extentTest;
     String repName;
 
-    @BeforeTest(alwaysRun = true)
+    /*@BeforeTest(alwaysRun = true)
     public void onStart(ITestContext testContext) {
 
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date());
@@ -42,10 +42,10 @@ public class ExtentReportManager implements ITestListener {
         extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
         extentReports.setSystemInfo("Environment", "QA Environment");
         extentReports.setSystemInfo("User", "Suleyman Cevik");
-    }
+    }*/
 
 
-    /*@BeforeTest(alwaysRun = true)
+    @BeforeTest(alwaysRun = true)
     public void onStart(ITestContext testContext) {
 
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date());//time stamp
@@ -55,7 +55,7 @@ public class ExtentReportManager implements ITestListener {
         extentSparkReporter = new ExtentSparkReporter(".\\reports\\" + repName);// specify location of the report
         extentSparkReporter.config().setDocumentTitle("RestAssuredAutomationProject"); // Title of report
         extentSparkReporter.config().setReportName("Pet Store Users API"); // name of the report
-        extentSparkReporter.config().setTheme(Theme.DARK);
+        extentSparkReporter.config().setTheme(Theme.STANDARD);
 
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
@@ -65,7 +65,7 @@ public class ExtentReportManager implements ITestListener {
         extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
         extentReports.setSystemInfo("Environment", "QA");
         extentReports.setSystemInfo("User", "Suleyman Cevik");
-    }*/
+    }
 
 
     public void onTestSuccess(ITestResult result) {

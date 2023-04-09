@@ -1,9 +1,0 @@
-21:20:48.282 [main] DEBUG api.test.UserTests2 - debugging.....
-21:20:48.292 [main] INFO  api.test.UserTests2 - ********** Creating user  ***************
-21:20:50.587 [main] INFO  api.test.UserTests2 - **********User is creatged  ***************
-21:20:50.590 [main] INFO  api.test.UserTests2 - ********** Reading User Info ***************
-21:20:51.712 [main] INFO  api.test.UserTests2 - **********User info  is displayed ***************
-21:20:51.714 [main] INFO  api.test.UserTests2 - ********** Updating User ***************
-21:20:52.706 [main] INFO  api.test.UserTests2 - ********** User updated ***************
-21:20:53.625 [main] INFO  api.test.UserTests2 - **********   Deleting User  ***************
-21:20:54.645 [main] INFO  api.test.UserTests2 - ********** User deleted ***************
