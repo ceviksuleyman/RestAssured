@@ -23,28 +23,6 @@ public class ExtentReportManager implements ITestListener {
     public ExtentTest extentTest;
     String repName;
 
-    /*@BeforeTest(alwaysRun = true)
-    public void onStart(ITestContext testContext) {
-
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date());
-        String filePath = System.getProperty("user.dir") + "/reports/TestReport-" + timeStamp + ".html";
-
-        extentHtmlReporter = new ExtentHtmlReporter(filePath);
-
-        extentHtmlReporter.config().setDocumentTitle("RestAssuredAutomationProject");
-        extentHtmlReporter.config().setReportName("Pet Store Users API");
-        extentHtmlReporter.config().setTheme(Theme.DARK);
-
-        extentReports = new ExtentReports();
-        extentReports.attachReporter(extentHtmlReporter);
-        extentReports.setSystemInfo("Application", "Pest Store Users API");
-        extentReports.setSystemInfo("Operating System", System.getProperty("os.name"));
-        extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
-        extentReports.setSystemInfo("Environment", "QA Environment");
-        extentReports.setSystemInfo("User", "Suleyman Cevik");
-    }*/
-
-
     @BeforeTest(alwaysRun = true)
     public void onStart(ITestContext testContext) {
 
@@ -62,11 +40,10 @@ public class ExtentReportManager implements ITestListener {
 
         extentReports.setSystemInfo("Application", "Pest Store Users API");
         extentReports.setSystemInfo("Operating System", System.getProperty("os.name"));
-        extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
+        extentReports.setSystemInfo("User", System.getProperty("user.name"));
         extentReports.setSystemInfo("Environment", "QA");
-        extentReports.setSystemInfo("User", "Suleyman Cevik");
+        extentReports.setSystemInfo("User Name", "Suleyman Cevik");
     }
-
 
     public void onTestSuccess(ITestResult result) {
         extentTest = extentReports.createTest(result.getName());
@@ -95,4 +72,25 @@ public class ExtentReportManager implements ITestListener {
     public void onFinish(ITestContext testContext) {
         extentReports.flush();
     }
+    /**
+     * @BeforeTest(alwaysRun = true)
+    public void onStart(ITestContext testContext) {
+
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date());
+        String filePath = System.getProperty("user.dir") + "/reports/TestReport-" + timeStamp + ".html";
+
+        extentHtmlReporter = new ExtentHtmlReporter(filePath);
+
+        extentHtmlReporter.config().setDocumentTitle("RestAssuredAutomationProject");
+        extentHtmlReporter.config().setReportName("Pet Store Users API");
+        extentHtmlReporter.config().setTheme(Theme.DARK);
+
+        extentReports = new ExtentReports();
+        extentReports.attachReporter(extentHtmlReporter);
+        extentReports.setSystemInfo("Application", "Pest Store Users API");
+        extentReports.setSystemInfo("Operating System", System.getProperty("os.name"));
+        extentReports.setSystemInfo("User Name", System.getProperty("user.name"));
+        extentReports.setSystemInfo("Environment", "QA Environment");
+        extentReports.setSystemInfo("User", "Suleyman Cevik");
+    }*/
 }
